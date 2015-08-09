@@ -1,10 +1,8 @@
 $my_full_name = "developer"
 $my_email = "developer@yourorg.domain"
 $oracle_password = 'oracle'
-$name=oracle
+$username=oracle
 $group=oracle
-
-/bin/cp -R /etc/skel /home/$oracle; /bin/chown -R $oracle:$oracle /home/$oracle
 
 include java::install
 
@@ -38,11 +36,22 @@ exec { "set-oracle-password":
 	require	=> User[oracle],
 }
 
+
 exec { "oracle homedir":
-	command	=> "/bin/cp -R /etc/skel /home/$name; /bin/chown -R $name:$group /home/$name",
-	creates	=> "/u01/app/oracle",
+	command	=> "/bin/cp -R /etc/skel /home/$username; /bin/chown -R $username:$group /home/$username",
+	creates	=> "/home/$username",
 	require	=> User[oracle],
 }
+
+$oracle_product_home_directories = ["/u01","/u01/app","/u01/app/oracle"]
+
+file { $oracle_product_home_directories:
+  ensure => directory,
+  group => 'oracle',
+  owner => 'oracle',
+  require => User[oracle],
+}
+
 
 exec { "apt-update":
     command => "/usr/bin/apt-get update"

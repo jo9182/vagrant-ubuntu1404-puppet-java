@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # this VM is based on the predefined box ubuntu/trusty64 that is available from the following URL  https://atlas.hashicorp.com/ubuntu/boxes/trusty64
   # note: the box will be downloaded from that URL if Vagrant cannot not find it locally (in the Vagrant home - by default: HOME/.vagrant.d/boxes))
 
-  config.vm.hostname = "dev.amis"
+  config.vm.hostname = "base.dev.amis"
 
   # added based on http://garylarizza.com/blog/2013/02/01/repeatable-puppet-development-with-vagrant/ and https://github.com/hashicorp/puppet-bootstrap/blob/master/ubuntu.sh
   # this script prepared the image for use of Puppet (one of several ways of doing that)
@@ -72,7 +72,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", "4096"]	
     vb.customize ["modifyvm", :id, "--vram", "32"]
     vb.gui = true
-    vb.name = "VM with Ubuntu 14.0.4, Graphical Desktop and Java; support for Puppet, Git"
+    vb.name = "Base VM with Ubuntu 14.0.4, Desktop and Java; support for Puppet, Git"
   end
   #
   # View the documentation for the provider you're using for more

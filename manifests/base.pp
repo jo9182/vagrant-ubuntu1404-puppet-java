@@ -1,7 +1,6 @@
 $my_full_name = "developer"
 $my_email = "developer@yourorg.domain"
 $oracle_password = 'oracle'
-$username=oracle
 $group=oracle
 
 include java::install
@@ -14,11 +13,11 @@ group { "oracle":
 	ensure		=> present,
 }
 
-exec { "restart-lightdm":
-	command => "/usr/bin/apt-get install linux-headers-$(uname -r); /etc/init.d/lightdm restart; /usr/bin/touch /etc/puppet/.lightdm",
-	creates => "/etc/puppet/.lightdm",
-	subscribe => Package['ubuntu-desktop'],
-}
+#exec { "restart-lightdm":
+#	command => "/usr/bin/apt-get install linux-headers-$(uname -r); /etc/init.d/lightdm restart; /usr/bin/touch /etc/puppet/.lightdm",
+#	creates => "/etc/puppet/.lightdm",
+#	subscribe => Package['ubuntu-desktop'],
+#}
 
 user { "oracle":
 	ensure		=> present,
